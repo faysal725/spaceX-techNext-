@@ -42,6 +42,17 @@ const HomePage = (props) => {
         const select = document.getElementById('launchDate');
         const text = select.options[select.selectedIndex].text;
         console.log(text)
+        let time 
+        if (text === "Last Year") {
+          time = new Date().getFullYear().toString()
+          console.log(time, typeof(time))
+        }
+        else if(text === "Last Month"){
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          time = new Date().getMonth().toString()
+          let month = monthNames[time]
+          console.log(month)
+        }
     }
 
     function filterByLaunchStatus() {
