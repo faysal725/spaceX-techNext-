@@ -1,30 +1,24 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { connect } from 'react-redux';
 import { useState } from 'react/cjs/react.development';
+import { searchDB } from '../../Redux/Actions/Actions';
 import './Search.css'
 
 
-const Search = () => {
-    // console.log(props.cd)
-    // console.log(props?.sd)
-    // const allData = props?.cd
-    // console.log(allData)
+const Search = (props) => {
 
+    const {searcheData, searchDB, displayItems} = props
 
+    // console.log(searcheData, searchDB, displayItems)
+ 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data =>{
-        console.log(data.search);
-        
-        // sdfsdkf
-        // filtering(data.search)
+        // console.log(data.search);
+        searchDB(data.search)
     } 
 
-    // function filtering(name) {
-    //     // console.log(name)
-    //     const filteredData = allData.filter(ad => ad.name.common === name)
-    //     // console.log(filteredData)
-    //     return props?.sd(filteredData)
-    // }
+
 
     return (
         <div>
@@ -50,4 +44,16 @@ const Search = () => {
     );
 };
 
-export default Search;
+const mapStateToProps = state => {
+    return {
+    displayItems: state.displayItems,
+      searcheData: state.searcheData
+  
+    }
+  }
+  
+  const mapDispatchToProps = {
+    searchDB: searchDB
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
